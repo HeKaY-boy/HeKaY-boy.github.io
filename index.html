@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Himanshu — AI & ML Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0f1117;
+      --surface:   #161b27;
+      --border:    #1f2636;
+      --text:      #c9d1e0;
+      --muted:     #5a6478;
+      --accent:    #7eb8c9;
+      --accent-dim:#2a4a56;
+      --head:      #e8edf5;
+      --mono:      'JetBrains Mono', monospace;
+      --serif:     'DM Serif Display', serif;
+      --sans:      'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 6vw;
+      background: rgba(15,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 6vw; max-width: 900px; margin: 0 auto; }
+    section + section { border-top: 1px solid var(--border); }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: 6rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--head);
+      line-height: 1.1;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1.25rem; flex-wrap: wrap;
+    }
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.75rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-primary:hover { background: #a0d2e3; }
+    .btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--head);
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+    .about-text p { color: var(--text); margin-bottom: 1rem; font-size: 0.97rem; }
+    .about-meta { display: flex; flex-direction: column; gap: 1.5rem; }
+    .meta-item { border-left: 1px solid var(--accent-dim); padding-left: 1.25rem; }
+    .meta-item .meta-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .meta-item .meta-value { font-size: 0.9rem; color: var(--text); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      transition: border-color 0.25s;
+    }
+    .skill-card:hover { border-color: var(--accent-dim); }
+    .skill-card-title {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 2px;
+      background: var(--border);
+      color: var(--muted);
+    }
+
+    /* ── PROJECTS ── */
+    .project-list { display: flex; flex-direction: column; gap: 2rem; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: border-color 0.25s;
+    }
+    .project-card:hover { border-color: var(--accent-dim); }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+    .project-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--head);
+      font-weight: 400;
+    }
+    .project-badge {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--accent-dim);
+      color: var(--accent);
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .project-desc { font-size: 0.93rem; color: var(--muted); margin-bottom: 1.25rem; line-height: 1.7; }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    /* ── CERTIFICATES ── */
+    .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: border-color 0.25s;
+    }
+    .cert-card:hover { border-color: var(--accent-dim); }
+    .cert-issuer {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .cert-name { font-size: 0.95rem; color: var(--head); line-height: 1.4; }
+    .cert-year { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-inner { max-width: 540px; }
+    .contact-inner p { color: var(--muted); margin-bottom: 2.5rem; font-size: 0.97rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text);
+      text-decoration: none;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.25s;
+      letter-spacing: 0.05em;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-icon { font-size: 1rem; width: 1.5rem; text-align: center; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 6vw;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SCROLL FADE ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">HK ·</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">// himanshu · engineer & researcher</p>
+    <h1>Building systems that<br/><em>learn and adapt.</em></h1>
+    <p class="hero-sub">
+      SDET at Cognizant by day, ML engineer by conviction.
+      Incoming MSc in AI & Engineering Systems at TU/e, Eindhoven.
+      I care about clean data, honest models, and software that ships.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">See my work</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="label fade-in">About</p>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <h2>A little about<br/><em>where I'm coming from.</em></h2>
+        <p>
+          I spent the last 2.5 years at Cognizant building test automation frameworks,
+          REST APIs, and CI/CD pipelines for a large telecom client — the kind of work
+          that teaches you to care deeply about reliability and edge cases.
+        </p>
+        <p>
+          Alongside that, I built and deployed ML models for enterprise sales and offer
+          prediction on AWS — real production systems, real stakes. That project made clear
+          where I want to go next.
+        </p>
+        <p>
+          In 2025 I'm relocating to Eindhoven to pursue my Master's in AI &
+          Engineering Systems at TU/e. I'm interested in the full arc — from raw data
+          to deployed, trustworthy models.
+        </p>
+      </div>
+      <div class="about-meta">
+        <div class="meta-item">
+          <div class="meta-label">Current role</div>
+          <div class="meta-value">Programmer Analyst / SDET<br/>Cognizant Technology Solutions</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Next chapter</div>
+          <div class="meta-value">MSc AI & Engineering Systems<br/>TU/e, Eindhoven · 2025–2027</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Domain focus</div>
+          <div class="meta-value">Telecom · Enterprise AI<br/>Data Engineering · MLOps</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Location</div>
+          <div class="meta-value">India → Eindhoven, Netherlands</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="label fade-in">Skills</p>
+    <div class="skills-grid fade-in">
+      <div class="skill-card">
+        <div class="skill-card-title">Languages</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">ML / AI</div>
+        <div class="skill-tags">
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">SageMaker</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Test Automation</div>
+        <div class="skill-tags">
+          <span class="tag">Selenium</span>
+          <span class="tag">PyTest</span>
+          <span class="tag">REST API Testing</span>
+          <span class="tag">Postman</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">DevOps & Cloud</div>
+        <div class="skill-tags">
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">GitLab CI</span>
+          <span class="tag">Docker</span>
+          <span class="tag">AWS EC2/S3</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Data Engineering</div>
+        <div class="skill-tags">
+          <span class="tag">ETL Pipelines</span>
+          <span class="tag">Data Warehousing</span>
+          <span class="tag">Apigee</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">Jira</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">Linux</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="label fade-in">Projects</p>
+    <div class="project-list fade-in">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Enterprise Sales & Offer Prediction</div>
+          <span class="project-badge">Deployed · AWS</span>
+        </div>
+        <p class="project-desc">
+          Built and deployed ML models to predict enterprise sales outcomes and recommend
+          targeted offers for a telecom client. The system ingests CRM and usage data,
+          runs feature engineering pipelines, and surfaces predictions via a REST API.
+          Deployed on AWS with SageMaker for model hosting and S3 for data management.
+        </p>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">AWS SageMaker</span>
+          <span class="tag">S3</span>
+          <span class="tag">REST API</span>
+          <span class="tag">Telecom</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">API Migration — Apigee to Enterprise Gateway</div>
+          <span class="project-badge">Cognizant · Telecom Client</span>
+        </div>
+        <p class="project-desc">
+          Led migration of production APIs from Apigee to an enterprise gateway for a
+          large telecom client. Involved mapping existing policies, rewriting proxy logic,
+          building automated regression test suites, and coordinating a zero-downtime
+          cutover with the client's infrastructure team.
+        </p>
+        <div class="project-stack">
+          <span class="tag">Apigee</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Selenium</span>
+          <span class="tag">Python</span>
+          <span class="tag">CI/CD</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Test Automation Framework</div>
+          <span class="project-badge">Internal · Cognizant</span>
+        </div>
+        <p class="project-desc">
+          Designed a reusable Selenium + PyTest framework for end-to-end and API regression
+          testing, integrated with GitHub Actions for CI. Reduced manual testing time
+          significantly and enabled the team to ship with more confidence across sprints.
+        </p>
+        <div class="project-stack">
+          <span class="tag">Selenium</span>
+          <span class="tag">PyTest</span>
+          <span class="tag">Java</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">GitLab CI</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <p class="label fade-in">Certificates</p>
+    <div class="cert-list fade-in">
+
+      <div class="cert-card">
+        <div class="cert-issuer">AWS</div>
+        <div class="cert-name">AWS Certified Cloud Practitioner</div>
+        <div class="cert-year">Add your year here</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer">Cognizant / Internal</div>
+        <div class="cert-name">Selenium Test Automation — Advanced</div>
+        <div class="cert-year">Add your year here</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer">Coursera / deeplearning.ai</div>
+        <div class="cert-name">Machine Learning Specialization</div>
+        <div class="cert-year">Add your year here</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-issuer">Add issuer</div>
+        <div class="cert-name">Add certificate name here</div>
+        <div class="cert-year">Add your year here</div>
+      </div>
+
+    </div>
+    <p style="margin-top:1.5rem; font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:#5a6478;">
+      // Update certificates with your real credentials above
+    </p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="label fade-in">Contact</p>
+    <div class="contact-inner fade-in">
+      <h2>Let's talk<br/><em>about what you're building.</em></h2>
+      <p>
+        Open to DS / ML / AI roles in the Netherlands post-graduation,
+        thesis collaborations, and interesting conversations about AI systems.
+      </p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:YOUR_EMAIL@gmail.com">
+          <span class="contact-icon">✉</span>
+          YOUR_EMAIL@gmail.com
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener">
+          <span class="contact-icon">in</span>
+          linkedin.com/in/YOUR_LINKEDIN
+        </a>
+        <a class="contact-link" href="https://github.com/HeKaY-boy" target="_blank" rel="noopener">
+          <span class="contact-icon">⌥</span>
+          github.com/HeKaY-boy
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Himanshu · Built with intention · Eindhoven, NL</p>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
